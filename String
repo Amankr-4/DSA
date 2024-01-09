@@ -1,1 +1,74 @@
+KMP Algo
+
+//lps (longest prefix suffix)
+
+	int lps(string s){
+	    vector<int> lps(s.size() , 0);
+	    int pre =0 , suf =1;
+	    int n = s.size();
+	    while(suf<n){
+	        if(s[pre] == s[suf]){
+	            lps[suf] = pre+1;
+	            pre++;
+	            suf++;
+	        }
+	        else{
+	            if(pre == 0){
+	                lps[suf] = 0;
+	                suf++;
+	            }
+	            else{
+	                pre = lps[pre-1];
+	            }
+	        }
+	    }
+	    return lps[n-1];
+	}
+
+// string matching KMP (return the first index of heystring from which needle starts if needle is not present in heystring then return -1
+haystack => parent string
+needle => child string
+
+int strStr(string haystack, string needle) {
+        if(haystack == needle) return 0;
+        int n = needle.size() , m = haystack.size();
+        vector<int> lps(n , 0);
+        int pre = 0 , suf =1;
+        while(suf<n){
+            if(needle[pre] == needle[suf]){
+                lps[suf] = pre+1;
+                pre++;
+                suf++;
+            }
+            else{
+                if(pre == 0){
+                    lps[suf] = 0;
+                    suf++;
+                }
+                else{
+                    pre = lps[pre-1];
+                }
+            }
+        }
+
+        int first =0 , second = 0;
+        while(first < m && second < n){
+            if(needle[second] == haystack[first]){
+                first++;
+                second++;
+            }
+            else{
+                if(second == 0){
+                    first++;
+                }
+                else{
+                    second = lps[second-1];
+                }
+            }
+        }
+        if(second == n){
+            return first-second;
+        }
+        return -1;
+    }
 
