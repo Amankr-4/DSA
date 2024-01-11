@@ -1,0 +1,85 @@
+Monotonic Stack
+
+Next smaller Element :
+
+        int n = heights.size();
+        stack<int> st;
+        vector<int> nse(n,n);
+        // nse  (next strictly smaller elem)
+        st.push(n-1);
+        for(int i = n-2 ; i>=0 ;i--){
+            while(!st.empty()){
+                if(heights[st.top()]<heights[i]){
+                    nse[i] = st.top();
+                    break;
+                }
+                st.pop();
+            }
+            if(st.empty()){
+                nse[i] = n;
+            }
+            st.push(i);
+        }
+
+
+Previous smaller element :
+
+        int n = heights.size();
+        stack<int> st;
+        vector<int> pse(n,-1);
+        st.push(0);
+        for(int i = 1 ; i<n ;i++){
+            while(!st.empty()){
+                if(heights[st.top()]<heights[i]){
+                    pse[i] = st.top();
+                    break;
+                }
+                st.pop();
+            }
+            if(st.empty()){
+                pse[i] = -1;
+            }
+            st.push(i);
+        }
+
+Next greater Element :
+
+        int n = heights.size();
+        stack<int> st;
+        vector<int> nge(n,n);
+        // nge  (next strictly greater elem)
+        st.push(n-1);
+        for(int i = n-2 ; i>=0 ;i--){
+            while(!st.empty()){
+                if(heights[st.top()]>heights[i]){
+                    nge[i] = st.top();
+                    break;
+                }
+                st.pop();
+            }
+            if(st.empty()){
+                nge[i] = n;
+            }
+            st.push(i);
+        }
+
+Previous greater element :
+
+        int n = heights.size();
+        stack<int> st;
+        vector<int> pge(n,-1);
+        st.push(0);
+        for(int i = 1 ; i<n ;i++){
+            while(!st.empty()){
+                if(heights[st.top()]>heights[i]){
+                    pge[i] = st.top();
+                    break;
+                }
+                st.pop();
+            }
+            if(st.empty()){
+                pge[i] = -1;
+            }
+            st.push(i);
+        }
+
