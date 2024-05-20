@@ -1,6 +1,6 @@
 KMP Algo
 
-//lps (longest prefix suffix)
+//lps (longest prefix suffix) in KMP
 
 	int lps(string s){
 	    vector<int> lps(s.size() , 0);
